@@ -28,6 +28,4 @@ public class ReacherGoal : MonoBehaviour
             agent.GetComponent<ReacherRobot>().AddReward(0.01f);
         }
     }
-
-
 }

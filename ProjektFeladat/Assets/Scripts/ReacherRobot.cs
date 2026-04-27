@@ -8,6 +8,20 @@ using Unity.MLAgents.Actuators;
 
 public class ReacherRobot : Agent
 {
+
+    [SerializeField] private Transform _rod;
+    [SerializeField] private Transform _goal;
+    [SerializeField] private Renderer _groundRenderer;
+
+    private Renderer _renderer;
+
+    [HideInInspector] public int CurrentEpisode = 0;
+    [HideInInspector] public float CumulativeReward = 0f;
+
+    private Color _defaultGroundColor;
+    private Coroutine _flashGroundCoroutine;
+
+
     public GameObject pendulumA;
     public GameObject pendulumB;
     public GameObject pendulumC;
@@ -23,8 +37,6 @@ public class ReacherRobot : Agent
     Rigidbody m_RbF;
 
     public GameObject hand;
-    public GameObject goal;
-
 
     public float m_GoalHeight = 1.2f;
     float m_GoalRadius;  //Radius of the goal zone
@@ -37,6 +49,17 @@ public class ReacherRobot : Agent
 
     public override void Initialize()
     {
+        Debug.Log("Initialize()"); //prints to console
+
+        _renderer = GetComponent<Renderer>();
+        CurrentEpisode = 0;
+        CumulativeReward = 0f;
+
+        if (_groundRenderer != null)
+        { // Store default gray color of the ground plane
+            _defaultGroundColor = _groundRenderer.material.color;
+        }
+
         m_RbA = pendulumA.GetComponent<Rigidbody>();
         m_RbB = pendulumB.GetComponent<Rigidbody>();
         m_RbC = pendulumC.GetComponent<Rigidbody>();
@@ -49,6 +72,31 @@ public class ReacherRobot : Agent
 
     public override void OnEpisodeBegin()
     {
+
+        Debug.Log("OnEpisodeBegin()");
+
+        if (_groundRenderer != null && CumulativeReward != 0f)
+        {
+            Color flashColor = (CumulativeReward > 0f) ? Color.green : Color.red;
+
+            // Stop any existing FlashGround coroutine before starting a new one
+            if (_flashGroundCoroutine != null)
+            {
+                StopCoroutine(_flashGroundCoroutine);
+            }
+
+            _flashGroundCoroutine = StartCoroutine(FlashGround(flashColor, 3.0f));
+        }
+
+        CurrentEpisode++;
+        CumulativeReward = 0f;
+
+        _renderer.material.color = Color.white;
+
+        SpawnObjects();
+
+
+
         //j1
         pendulumA.transform.position = new Vector3(0f, 0.55f, 0f) + transform.position; //transform.position a copyzás miatt 
         pendulumA.transform.rotation = Quaternion.Euler(-90f, 0, 0);
@@ -90,6 +138,19 @@ public class ReacherRobot : Agent
         m_GoalDegree += m_GoalSpeed;
         UpdateGoalPosition();
     }
+    private IEnumerator FlashGround(Color targetColor, float duration)
+    {
+        float elapsedTime = 0f;
+
+        _groundRenderer.material.color = targetColor;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            _groundRenderer.material.color = Color.Lerp(targetColor, _defaultGroundColor, elapsedTime / duration);
+            yield return null;
+        }
+    }
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -123,10 +184,10 @@ public class ReacherRobot : Agent
         sensor.AddObservation(m_RbF.linearVelocity);
         sensor.AddObservation(m_RbF.angularVelocity);
 
-        sensor.AddObservation(goal.transform.localPosition);
+        //sensor.AddObservation(goal.transform.localPosition);
         sensor.AddObservation(hand.transform.localPosition);
 
-        sensor.AddObservation(m_GoalSpeed);
+        //sensor.AddObservation(m_GoalSpeed);
     }
     public void SetResetParameters()
     {
@@ -159,11 +220,28 @@ public class ReacherRobot : Agent
 
         m_GoalDegree += m_GoalSpeed;
         UpdateGoalPosition();
-
-        float distance = Vector3.Distance(hand.transform.position, goal.transform.position);
-
-        AddReward(0.01f / (1f + distance));
+        
         AddReward(-0.0001f);
+    }
+    private void SpawnObjects()
+    {
+        //randomize position of the goal relative to the trutle
+        // Randomize the direction on the Y-axis (angle in degrees)
+        float yawAngle = Random.Range(0f, 360f);
+        float pitchAngle = Random.Range(-75f, 30f);
+        Vector3 randomDirection = Quaternion.Euler(pitchAngle, yawAngle, 0f) * Vector3.forward;
+
+        
+        float randomDistance = Random.Range(0.8f, 1.5f);
+
+
+        //place goal
+        // Calculate the goal's position
+        Vector3 goalPosition = transform.localPosition + randomDirection * randomDistance;
+
+        // Apply the calculated position to the goal
+        _goal.localPosition = goalPosition;
+
     }
 
     void UpdateGoalPosition()
@@ -175,7 +253,7 @@ public class ReacherRobot : Agent
             var goalZ = m_GoalRadius * Mathf.Sin(m_GoalDegree_rad);
             var goalY = m_GoalHeight + m_GoalDeviation * Mathf.Cos(m_GoalDeviationFreq * m_GoalDegree_rad); //
 
-            goal.transform.position = new Vector3(goalX, goalY, goalZ) + transform.position;
+           // goal.transform.position = new Vector3(goalX, goalY, goalZ) + transform.position;
         }
 
 
