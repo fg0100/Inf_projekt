@@ -9,18 +9,15 @@ using Unity.MLAgents.Actuators;
 public class ReacherRobot : Agent
 {
 
-    [SerializeField] private Transform _rod;
     [SerializeField] private Transform _goal;
     [SerializeField] private Renderer _groundRenderer;
 
-    private Renderer _renderer;
-
     [HideInInspector] public int CurrentEpisode = 0;
     [HideInInspector] public float CumulativeReward = 0f;
+    [HideInInspector] public float DeltaReward = 0f;
 
     private Color _defaultGroundColor;
     private Coroutine _flashGroundCoroutine;
-
 
     public GameObject pendulumA;
     public GameObject pendulumB;
@@ -36,29 +33,33 @@ public class ReacherRobot : Agent
     Rigidbody m_RbE;
     Rigidbody m_RbF;
 
+    public GameObject rod;
     public GameObject hand;
 
-    public float m_GoalHeight = 1.2f;
-    float m_GoalRadius;  //Radius of the goal zone
-    float m_GoalDegree; //How much the goal rotates
-    float m_GoalSpeed;  //speed of the goal rotation
-    float m_GoalDeviation;  //How much goes up and down from the goal height
-    float m_GoalDeviationFreq;  //Frequency of the goal up and down movement
+    public float m_RodHeight = 1.7f;
+    float m_RodRadius;  //Radius of the goal zone
+    float m_RodDegree; //How much the goal rotates
+    float m_RodSpeed;  //speed of the goal rotation
+    float m_RodDeviation;  //How much goes up and down from the goal height
+    float m_RodDeviationFreq;  //Frequency of the goal up and down movement
 
+
+    private float _previousDistance;
     public bool blHeuristic = false;
 
     public override void Initialize()
     {
-        Debug.Log("Initialize()"); //prints to console
+        Debug.Log("Initialize()"); 
 
-        _renderer = GetComponent<Renderer>();
         CurrentEpisode = 0;
         CumulativeReward = 0f;
+        _previousDistance = 0f; 
 
         if (_groundRenderer != null)
-        { // Store default gray color of the ground plane
+        {
             _defaultGroundColor = _groundRenderer.material.color;
         }
+
 
         m_RbA = pendulumA.GetComponent<Rigidbody>();
         m_RbB = pendulumB.GetComponent<Rigidbody>();
@@ -73,6 +74,7 @@ public class ReacherRobot : Agent
     public override void OnEpisodeBegin()
     {
 
+        Debug.Log("Episode " + CurrentEpisode + " ended with reward: " + CumulativeReward);
         Debug.Log("OnEpisodeBegin()");
 
         if (_groundRenderer != null && CumulativeReward != 0f)
@@ -90,12 +92,7 @@ public class ReacherRobot : Agent
 
         CurrentEpisode++;
         CumulativeReward = 0f;
-
-        _renderer.material.color = Color.white;
-
-        SpawnObjects();
-
-
+        _previousDistance = 0f;  
 
         //j1
         pendulumA.transform.position = new Vector3(0f, 0.55f, 0f) + transform.position; //transform.position a copyzás miatt 
@@ -104,39 +101,42 @@ public class ReacherRobot : Agent
         m_RbA.angularVelocity = Vector3.zero;
 
         //j2
-        pendulumB.transform.position = new Vector3(-0.15f, 0.55f, 0f) + transform.position; //transform.position a copyzás miatt 
+        pendulumB.transform.position = new Vector3(-0.15f, 0.55f, 0f) + transform.position; 
         pendulumB.transform.rotation = Quaternion.Euler(-90f, 0, 0);
         m_RbB.linearVelocity = Vector3.zero;
         m_RbB.angularVelocity = Vector3.zero;
 
         //j3
-        pendulumC.transform.position = new Vector3(-0.15f, 1.375f, 0f) + transform.position; //transform.position a copyzás miatt 
+        pendulumC.transform.position = new Vector3(-0.15f, 1.375f, 0f) + transform.position; 
         pendulumC.transform.rotation = Quaternion.Euler(-90f, 0, 0);
         m_RbC.linearVelocity = Vector3.zero;
         m_RbC.angularVelocity = Vector3.zero;
 
         //j4
-        pendulumD.transform.position = new Vector3(-0.15f, 1.375f, 0f) + transform.position; //transform.position a copyzás miatt 
+        pendulumD.transform.position = new Vector3(-0.15f, 1.375f, 0f) + transform.position; 
         pendulumD.transform.rotation = Quaternion.Euler(-90f, 0, 0);
         m_RbD.linearVelocity = Vector3.zero;
         m_RbD.angularVelocity = Vector3.zero;
 
         //j5
-        pendulumE.transform.position = new Vector3(-0.15f, 2f, 0f) + transform.position; //transform.position a copyzás miatt 
+        pendulumE.transform.position = new Vector3(-0.15f, 2f, 0f) + transform.position; 
         pendulumE.transform.rotation = Quaternion.Euler(-90f, 0, 0);
         m_RbE.linearVelocity = Vector3.zero;
         m_RbE.angularVelocity = Vector3.zero;
 
         //j6
-        pendulumF.transform.position = new Vector3(-0.15f, 2.11f, 0f) + transform.position; //transform.position a copyzás miatt 
+        pendulumF.transform.position = new Vector3(-0.15f, 2.11f, 0f) + transform.position; 
         pendulumF.transform.rotation = Quaternion.Euler(-90f, 0, 0);
         m_RbF.linearVelocity = Vector3.zero;
         m_RbF.angularVelocity = Vector3.zero;
 
         SetResetParameters();
+        SpawnObjects();
+        _previousDistance = Vector3.Distance(hand.transform.localPosition, _goal.transform.localPosition);
 
-        m_GoalDegree += m_GoalSpeed;
-        UpdateGoalPosition();
+        m_RodDegree += m_RodSpeed;
+        UpdateRodPosition();
+
     }
     private IEnumerator FlashGround(Color targetColor, float duration)
     {
@@ -154,6 +154,10 @@ public class ReacherRobot : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        float goalPosX_normalized = _goal.localPosition.x / 5f;
+        float goalPosY_normalized = _goal.localPosition.y / 5f;
+        float goalPosZ_normalized = _goal.localPosition.z / 5f;
+
         sensor.AddObservation(pendulumA.transform.localPosition);
         sensor.AddObservation(pendulumA.transform.rotation);
         sensor.AddObservation(m_RbA.linearVelocity);
@@ -184,19 +188,22 @@ public class ReacherRobot : Agent
         sensor.AddObservation(m_RbF.linearVelocity);
         sensor.AddObservation(m_RbF.angularVelocity);
 
-        //sensor.AddObservation(goal.transform.localPosition);
         sensor.AddObservation(hand.transform.localPosition);
-
-        //sensor.AddObservation(m_GoalSpeed);
+        sensor.AddObservation(rod.transform.localPosition);
+        sensor.AddObservation(_goal.transform.localPosition);
+        
+        sensor.AddObservation(m_RodSpeed);
     }
+
     public void SetResetParameters()
     {
-        m_GoalRadius = Random.Range(1f, 1.3f);
-        m_GoalDegree = Random.Range(0f, 360f);
-        m_GoalSpeed = Random.Range(-2f, 2f);
-        m_GoalDeviation = Random.Range(-1f, 1f);
-        m_GoalDeviationFreq = Random.Range(0f, 3.14f);
+        m_RodRadius = Random.Range(1f, 1.3f);
+        m_RodDegree = Random.Range(0f, 360f);
+        m_RodSpeed = Random.Range(-2f, 2f);
+        m_RodDeviation = Random.Range(-1f, 1f);
+        m_RodDeviationFreq = Random.Range(0f, 3.14f);
     }
+
 
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -218,23 +225,35 @@ public class ReacherRobot : Agent
         torque = Mathf.Clamp(actions.ContinuousActions[5], -1f, 1f) * 150f;
         m_RbF.AddTorque(new Vector3(0f, torque, 0f));
 
-        m_GoalDegree += m_GoalSpeed;
-        UpdateGoalPosition();
-        
-        AddReward(-0.0001f);
+        m_RodDegree += m_RodSpeed;
+        UpdateRodPosition();
+
+        float currentDistance = Vector3.Distance(_goal.transform.localPosition, hand.transform.localPosition);
+        DeltaReward = _previousDistance - currentDistance;
+        _previousDistance = currentDistance;
+        AddReward(DeltaReward * 0.1f);
+        AddReward(2f / MaxStep);
+
+        CumulativeReward = GetCumulativeReward();
+    
     }
+
+    public void ReportTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Goal"))
+        {
+            GoalReached();
+        }
+    }
+
     private void SpawnObjects()
     {
-        //randomize position of the goal relative to the trutle
-        // Randomize the direction on the Y-axis (angle in degrees)
+        
         float yawAngle = Random.Range(0f, 360f);
         float pitchAngle = Random.Range(-75f, 30f);
         Vector3 randomDirection = Quaternion.Euler(pitchAngle, yawAngle, 0f) * Vector3.forward;
-
         
         float randomDistance = Random.Range(0.8f, 1.5f);
-
-
         //place goal
         // Calculate the goal's position
         Vector3 goalPosition = transform.localPosition + randomDirection * randomDistance;
@@ -244,20 +263,59 @@ public class ReacherRobot : Agent
 
     }
 
-    void UpdateGoalPosition()
+    void UpdateRodPosition()
     {
-        if(!blHeuristic)
-        { 
-            var m_GoalDegree_rad = m_GoalDegree * Mathf.PI / 180f;
-            var goalX = m_GoalRadius * Mathf.Cos(m_GoalDegree_rad);
-            var goalZ = m_GoalRadius * Mathf.Sin(m_GoalDegree_rad);
-            var goalY = m_GoalHeight + m_GoalDeviation * Mathf.Cos(m_GoalDeviationFreq * m_GoalDegree_rad); //
+        if (!blHeuristic)
+        {
+            var m_rodDegree_rad = m_RodDegree * Mathf.PI / 180f;
+            var rodX = m_RodRadius * Mathf.Cos(m_rodDegree_rad);
+            var rodZ = m_RodRadius * Mathf.Sin(m_rodDegree_rad);
+            var rodY = m_RodHeight + m_RodDeviation * Mathf.Cos(m_RodDeviationFreq * m_rodDegree_rad);
 
-           // goal.transform.position = new Vector3(goalX, goalY, goalZ) + transform.position;
+            rod.transform.position = new Vector3(rodX, rodY, rodZ) + transform.position;         
         }
 
 
     }
 
+    private void GoalReached()
+    {
+        Debug.Log("GOAL REACHED! Reward: " + GetCumulativeReward());
+        AddReward(1.0f); 
+        CumulativeReward = GetCumulativeReward();
+
+        EndEpisode();
+    }
+
+    public void ReportCollisionEnter(Collision collision)
+    {        
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Rod"))
+        {
+            AddReward(-0.05f);           
+            if (_groundRenderer != null)
+            {
+                Debug.Log("COLLISION with: " + collision.gameObject.name);
+                _groundRenderer.material.color = new Color(1f, 0.5f, 0f);
+            }
+           
+        }
+    }
+    public void ReportCollisionStay(Collision collision)
+    {        
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Rod"))
+        {
+            AddReward(-0.01f * Time.fixedDeltaTime);
+        }
+    }
+    public void ReportCollisionExit(Collision collision)
+    {        
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Rod"))
+        {
+            if (_groundRenderer != null)
+            {
+                _groundRenderer.material.color = _defaultGroundColor;
+            }
+        }
+    }
 
 }

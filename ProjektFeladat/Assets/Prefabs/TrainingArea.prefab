@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6751887947529370134}
   - component: {fileID: 353887872245525390}
   - component: {fileID: 5963872739924088044}
+  - component: {fileID: 5450004871310841247}
   m_Layer: 0
   m_Name: j1
   m_TagString: Untagged
@@ -244,6 +245,18 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5450004871310841247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792140053499982681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
 --- !u!1 &833365658438991847
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +271,7 @@ GameObject:
   - component: {fileID: 3744397796583943082}
   - component: {fileID: 5241385292897094719}
   - component: {fileID: 7478848290788817613}
+  - component: {fileID: 3631602807010332695}
   m_Layer: 0
   m_Name: j5
   m_TagString: Untagged
@@ -487,6 +501,18 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &3631602807010332695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833365658438991847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
 --- !u!1 &880304930489851024
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +558,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3150587231147994392}
   - component: {fileID: 363156717960540991}
+  - component: {fileID: 4138305001316568074}
+  - component: {fileID: 1828489165950503295}
+  - component: {fileID: 2695260702612391748}
   m_Layer: 0
   m_Name: EndEffector
   m_TagString: Untagged
@@ -575,6 +604,57 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4138305001316568074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152238877969281977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
+--- !u!114 &1828489165950503295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152238877969281977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b728df4cabbdde44bf990890423dca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerReporter
+--- !u!54 &2695260702612391748
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152238877969281977}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2356134858030416520
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 85
+    VectorObservationSize: 88
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 6
@@ -663,19 +743,20 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 4000
-  _rod: {fileID: 0}
-  _goal: {fileID: 0}
-  _groundRenderer: {fileID: 0}
+  _goal: {fileID: 111109804041183538}
+  _groundRenderer: {fileID: 4559257276090902076}
   CurrentEpisode: 0
   CumulativeReward: 0
+  DeltaReward: 0
   pendulumA: {fileID: 792140053499982681}
   pendulumB: {fileID: 8822860890260292320}
   pendulumC: {fileID: 8179658338943220735}
   pendulumD: {fileID: 5668370025906490423}
   pendulumE: {fileID: 833365658438991847}
   pendulumF: {fileID: 8375763224424725898}
+  rod: {fileID: 6999340393776688321}
   hand: {fileID: 2152238877969281977}
-  m_GoalHeight: 1.2
+  m_RodHeight: 2.2
   blHeuristic: 0
 --- !u!114 &7712199219926935397
 MonoBehaviour:
@@ -944,8 +1025,8 @@ Transform:
   m_GameObject: {fileID: 4109236894439719605}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.957, z: 1.199}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0.746, y: 2.41, z: 0.662}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322513509848929693}
@@ -1191,6 +1272,7 @@ GameObject:
   - component: {fileID: 9129366813530185897}
   - component: {fileID: 8850279231357918359}
   - component: {fileID: 1941749996059390218}
+  - component: {fileID: 914691624940133141}
   m_Layer: 0
   m_Name: j4
   m_TagString: Untagged
@@ -1421,6 +1503,18 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &914691624940133141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668370025906490423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
 --- !u!1 &5895377711248930846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,7 +1881,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.583, y: 2.35, z: 0.43708}
-  m_LocalScale: {x: 0.1, y: 2.5, z: 0.1}
+  m_LocalScale: {x: 0.1, y: 0.5, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322513509848929693}
@@ -2025,6 +2119,7 @@ GameObject:
   - component: {fileID: 4868069203776410014}
   - component: {fileID: 1149787699555473507}
   - component: {fileID: 1368144641124811757}
+  - component: {fileID: 2450489659038241521}
   m_Layer: 0
   m_Name: j3
   m_TagString: Untagged
@@ -2255,6 +2350,18 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2450489659038241521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179658338943220735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
 --- !u!1 &8375763224424725898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2269,6 +2376,7 @@ GameObject:
   - component: {fileID: 6665459676212376854}
   - component: {fileID: 5782884836319965126}
   - component: {fileID: 4811276343225448348}
+  - component: {fileID: 5361646904170914500}
   m_Layer: 0
   m_Name: j6
   m_TagString: Untagged
@@ -2500,6 +2608,18 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5361646904170914500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8375763224424725898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
 --- !u!1 &8822860890260292320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,6 +2634,7 @@ GameObject:
   - component: {fileID: 3546797358479511627}
   - component: {fileID: 3290882850092883377}
   - component: {fileID: 6517503096625390788}
+  - component: {fileID: 6315930202865645967}
   m_Layer: 0
   m_Name: j2
   m_TagString: Untagged
@@ -2744,3 +2865,15 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6315930202865645967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822860890260292320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
