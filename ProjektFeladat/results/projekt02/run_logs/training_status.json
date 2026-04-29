@@ -1,0 +1,65 @@
+{
+    "RobotReacher": {
+        "checkpoints": [
+            {
+                "steps": 11999918,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-11999918.onnx",
+                "reward": 1.5043155951425433,
+                "creation_time": 1777490170.0538995,
+                "auxillary_file_paths": [
+                    "results\\projekt02\\RobotReacher\\RobotReacher-11999918.pt"
+                ]
+            },
+            {
+                "steps": 12429552,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-12429552.onnx",
+                "reward": 1.9523580769697826,
+                "creation_time": 1777490573.7054412,
+                "auxillary_file_paths": [
+                    "results\\projekt02\\RobotReacher\\RobotReacher-12429552.pt"
+                ]
+            },
+            {
+                "steps": 12499944,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-12499944.onnx",
+                "reward": 0.8095966118077437,
+                "creation_time": 1777490690.480229,
+                "auxillary_file_paths": [
+                    "results\\projekt02\\RobotReacher\\RobotReacher-12499944.pt"
+                ]
+            },
+            {
+                "steps": 12999958,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-12999958.onnx",
+                "reward": 1.035098892564957,
+                "creation_time": 1777491058.2010784,
+                "auxillary_file_paths": [
+                    "results\\projekt02\\RobotReacher\\RobotReacher-12999958.pt"
+                ]
+            },
+            {
+                "steps": 13000387,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-13000387.onnx",
+                "reward": 1.090687916214977,
+                "creation_time": 1777491058.322558,
+                "auxillary_file_paths": [
+                    "results\\projekt02\\RobotReacher\\RobotReacher-13000387.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 13000387,
+            "file_path": "results\\projekt02\\RobotReacher.onnx",
+            "reward": 1.090687916214977,
+            "creation_time": 1777491058.322558,
+            "auxillary_file_paths": [
+                "results\\projekt02\\RobotReacher\\RobotReacher-13000387.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.2.0.dev0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

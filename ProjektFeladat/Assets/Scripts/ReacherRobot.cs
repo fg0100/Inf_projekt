@@ -132,7 +132,7 @@ public class ReacherRobot : Agent
 
         SetResetParameters();
         SpawnObjects();
-        _previousDistance = Vector3.Distance(hand.transform.localPosition, _goal.transform.localPosition);
+        _previousDistance = Vector3.Distance(hand.transform.position, _goal.transform.position);
 
         m_RodDegree += m_RodSpeed;
         UpdateRodPosition();
@@ -151,47 +151,57 @@ public class ReacherRobot : Agent
             yield return null;
         }
     }
+    private Vector3 ToAgentLocal(Vector3 worldPos)
+    {
+        return transform.InverseTransformPoint(worldPos);
 
+    }
     public override void CollectObservations(VectorSensor sensor)
     {
-        float goalPosX_normalized = _goal.localPosition.x / 5f;
-        float goalPosY_normalized = _goal.localPosition.y / 5f;
-        float goalPosZ_normalized = _goal.localPosition.z / 5f;
+        //float goalPosX_normalized = _goal.localPosition.x / 5f;
+        //float goalPosY_normalized = _goal.localPosition.y / 5f;
+        //float goalPosZ_normalized = _goal.localPosition.z / 5f;
 
-        sensor.AddObservation(pendulumA.transform.localPosition);
+        sensor.AddObservation(ToAgentLocal(pendulumA.transform.position));
         sensor.AddObservation(pendulumA.transform.rotation);
         sensor.AddObservation(m_RbA.linearVelocity);
         sensor.AddObservation(m_RbA.angularVelocity);
 
-        sensor.AddObservation(pendulumB.transform.localPosition);
+       // sensor.AddObservation(pendulumB.transform.localPosition);
+        sensor.AddObservation(ToAgentLocal(pendulumB.transform.position));
         sensor.AddObservation(pendulumB.transform.rotation);
         sensor.AddObservation(m_RbB.linearVelocity);
         sensor.AddObservation(m_RbB.angularVelocity);
 
-        sensor.AddObservation(pendulumC.transform.localPosition);
+        //sensor.AddObservation(pendulumC.transform.localPosition);
+        sensor.AddObservation(ToAgentLocal(pendulumC.transform.position));
         sensor.AddObservation(pendulumC.transform.rotation);
         sensor.AddObservation(m_RbC.linearVelocity);
         sensor.AddObservation(m_RbC.angularVelocity);
 
-        sensor.AddObservation(pendulumD.transform.localPosition);
+        //sensor.AddObservation(pendulumD.transform.localPosition);
+        sensor.AddObservation(ToAgentLocal(pendulumD.transform.position));
         sensor.AddObservation(pendulumD.transform.rotation);
         sensor.AddObservation(m_RbD.linearVelocity);
         sensor.AddObservation(m_RbD.angularVelocity);
 
-        sensor.AddObservation(pendulumE.transform.localPosition);
+        //sensor.AddObservation(pendulumE.transform.localPosition);
+        sensor.AddObservation(ToAgentLocal(pendulumE.transform.position));
         sensor.AddObservation(pendulumE.transform.rotation);
         sensor.AddObservation(m_RbE.linearVelocity);
         sensor.AddObservation(m_RbE.angularVelocity);
 
-        sensor.AddObservation(pendulumF.transform.localPosition);
+        //sensor.AddObservation(pendulumF.transform.localPosition);
+        sensor.AddObservation(ToAgentLocal(pendulumF.transform.position));
         sensor.AddObservation(pendulumF.transform.rotation);
         sensor.AddObservation(m_RbF.linearVelocity);
         sensor.AddObservation(m_RbF.angularVelocity);
 
-        sensor.AddObservation(hand.transform.localPosition);
-        sensor.AddObservation(rod.transform.localPosition);
-        sensor.AddObservation(_goal.transform.localPosition);
+        sensor.AddObservation(ToAgentLocal(hand.transform.position));
+        sensor.AddObservation(ToAgentLocal(rod.transform.position));
+        sensor.AddObservation(ToAgentLocal(_goal.position));
         
+
         sensor.AddObservation(m_RodSpeed);
     }
 
@@ -199,7 +209,8 @@ public class ReacherRobot : Agent
     {
         m_RodRadius = Random.Range(1f, 1.3f);
         m_RodDegree = Random.Range(0f, 360f);
-        m_RodSpeed = Random.Range(-2f, 2f);
+        m_RodSpeed = Random.Range(-1f, 1f);
+       // m_RodSpeed = 0f;
         m_RodDeviation = Random.Range(-1f, 1f);
         m_RodDeviationFreq = Random.Range(0f, 3.14f);
     }
@@ -207,33 +218,33 @@ public class ReacherRobot : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        var torque = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f) * 150f;
+        var torque = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f) * 100f;
         m_RbA.AddTorque(new Vector3(0f, torque, 0f));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f) * 150f;
+        torque = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f) * 100f;
         m_RbB.AddTorque(new Vector3(0f, 0f, torque));
        
-        torque = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f) * 150f;
+        torque = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f) * 100f;
         m_RbC.AddTorque(new Vector3(0f, 0f, torque));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[3], -1f, 1f) * 150f;
+        torque = Mathf.Clamp(actions.ContinuousActions[3], -1f, 1f) * 100f;
         m_RbD.AddTorque(new Vector3(0f, torque, 0f));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[4], -1f, 1f) * 150f;
+        torque = Mathf.Clamp(actions.ContinuousActions[4], -1f, 1f) * 100f;
         m_RbE.AddTorque(new Vector3(0f, 0f, torque));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[5], -1f, 1f) * 150f;
+        torque = Mathf.Clamp(actions.ContinuousActions[5], -1f, 1f) * 100f;
         m_RbF.AddTorque(new Vector3(0f, torque, 0f));
 
         m_RodDegree += m_RodSpeed;
         UpdateRodPosition();
 
-        float currentDistance = Vector3.Distance(_goal.transform.localPosition, hand.transform.localPosition);
+        float currentDistance = Vector3.Distance(_goal.position, hand.transform.position);
         DeltaReward = _previousDistance - currentDistance;
         _previousDistance = currentDistance;
         AddReward(DeltaReward * 0.1f);
-        AddReward(2f / MaxStep);
-
+        AddReward(-2f / MaxStep);
+       
         CumulativeReward = GetCumulativeReward();
     
     }
@@ -250,7 +261,7 @@ public class ReacherRobot : Agent
     {
         
         float yawAngle = Random.Range(0f, 360f);
-        float pitchAngle = Random.Range(-75f, 30f);
+        float pitchAngle = Random.Range(-45f, 45f);
         Vector3 randomDirection = Quaternion.Euler(pitchAngle, yawAngle, 0f) * Vector3.forward;
         
         float randomDistance = Random.Range(0.8f, 1.5f);
@@ -259,6 +270,7 @@ public class ReacherRobot : Agent
         Vector3 goalPosition = transform.localPosition + randomDirection * randomDistance;
 
         // Apply the calculated position to the goal
+        goalPosition.y += 1f;
         _goal.localPosition = goalPosition;
 
     }
@@ -274,16 +286,17 @@ public class ReacherRobot : Agent
 
             rod.transform.position = new Vector3(rodX, rodY, rodZ) + transform.position;         
         }
-
-
     }
 
     private void GoalReached()
     {
-        Debug.Log("GOAL REACHED! Reward: " + GetCumulativeReward());
-        AddReward(1.0f); 
+        AddReward(3.0f); 
         CumulativeReward = GetCumulativeReward();
-
+        if (_groundRenderer != null)
+        {
+            _groundRenderer.material.color = new Color(0f, 0f, 1f);
+        }
+        Debug.Log("GOAL REACHED! Reward: " + GetCumulativeReward());
         EndEpisode();
     }
 
@@ -291,7 +304,7 @@ public class ReacherRobot : Agent
     {        
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Rod"))
         {
-            AddReward(-0.05f);           
+            AddReward(-0.2f);           
             if (_groundRenderer != null)
             {
                 Debug.Log("COLLISION with: " + collision.gameObject.name);
@@ -304,7 +317,7 @@ public class ReacherRobot : Agent
     {        
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Rod"))
         {
-            AddReward(-0.01f * Time.fixedDeltaTime);
+            AddReward(-0.05f * Time.fixedDeltaTime);
         }
     }
     public void ReportCollisionExit(Collision collision)

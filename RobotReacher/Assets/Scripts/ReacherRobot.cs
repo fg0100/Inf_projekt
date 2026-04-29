@@ -132,7 +132,7 @@ public class ReacherRobot : Agent
     {
         m_GoalRadius = Random.Range(1f, 1.3f);
         m_GoalDegree = Random.Range(0f, 360f);
-        m_GoalSpeed = Random.Range(-2f, 2f);
+        m_GoalSpeed = Random.Range(-1.5f, 1.5f);
         m_GoalDeviation = Random.Range(-1f, 1f);
         m_GoalDeviationFreq = Random.Range(0f, 3.14f);
     }
@@ -160,9 +160,9 @@ public class ReacherRobot : Agent
         m_GoalDegree += m_GoalSpeed;
         UpdateGoalPosition();
 
-        float distance = Vector3.Distance(hand.transform.position, goal.transform.position);
+        //float distance = Vector3.Distance(hand.transform.position, goal.transform.position);
 
-        AddReward(0.01f / (1f + distance));
+        //AddReward(0.01f / (1f + distance));
         AddReward(-0.0001f);
     }
 
@@ -173,7 +173,7 @@ public class ReacherRobot : Agent
             var m_GoalDegree_rad = m_GoalDegree * Mathf.PI / 180f;
             var goalX = m_GoalRadius * Mathf.Cos(m_GoalDegree_rad);
             var goalZ = m_GoalRadius * Mathf.Sin(m_GoalDegree_rad);
-            var goalY = m_GoalHeight + m_GoalDeviation * Mathf.Cos(m_GoalDeviationFreq * m_GoalDegree_rad); //
+            var goalY = m_GoalHeight + m_GoalDeviation * Mathf.Cos(m_GoalDeviationFreq * m_GoalDegree_rad); 
 
             goal.transform.position = new Vector3(goalX, goalY, goalZ) + transform.position;
         }

@@ -1,0 +1,29 @@
+{
+    "RobotReacher": {
+        "checkpoints": [
+            {
+                "steps": 124800,
+                "file_path": "results\\reacher01\\RobotReacher\\RobotReacher-124800.onnx",
+                "reward": -0.38083336999018985,
+                "creation_time": 1777477540.799727,
+                "auxillary_file_paths": [
+                    "results\\reacher01\\RobotReacher\\RobotReacher-124800.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 124800,
+            "file_path": "results\\reacher01\\RobotReacher.onnx",
+            "reward": -0.38083336999018985,
+            "creation_time": 1777477540.799727,
+            "auxillary_file_paths": [
+                "results\\reacher01\\RobotReacher\\RobotReacher-124800.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.2.0.dev0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

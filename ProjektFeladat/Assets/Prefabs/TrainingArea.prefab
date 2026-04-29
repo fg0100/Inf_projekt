@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5450004871310841247}
   m_Layer: 0
   m_Name: j1
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,7 +163,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 0
   m_AngularYMotion: 0
-  m_AngularZMotion: 1
+  m_AngularZMotion: 2
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 3631602807010332695}
   m_Layer: 0
   m_Name: j5
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 2695260702612391748}
   m_Layer: 0
   m_Name: EndEffector
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: bdfb20cac49318c4ab8691d22f3c6bc6, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: RobotReacher
@@ -742,7 +742,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 4000
+  MaxStep: 2000
   _goal: {fileID: 111109804041183538}
   _groundRenderer: {fileID: 4559257276090902076}
   CurrentEpisode: 0
@@ -756,7 +756,7 @@ MonoBehaviour:
   pendulumF: {fileID: 8375763224424725898}
   rod: {fileID: 6999340393776688321}
   hand: {fileID: 2152238877969281977}
-  m_RodHeight: 2.2
+  m_RodHeight: 1.8
   blHeuristic: 0
 --- !u!114 &7712199219926935397
 MonoBehaviour:
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
-  DecisionPeriod: 5
+  DecisionPeriod: 4
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
 --- !u!1 &3188781608050707621
@@ -899,7 +899,7 @@ GameObject:
   - component: {fileID: 3572235697019876853}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -913,8 +913,8 @@ Transform:
   m_GameObject: {fileID: 3655304290844513480}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.55, y: 2, z: 0}
-  m_LocalScale: {x: 3.05, y: 4, z: 0.05}
+  m_LocalPosition: {x: 1.75, y: 2, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1680528828951252595}
@@ -1026,7 +1026,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.746, y: 2.41, z: 0.662}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5322513509848929693}
@@ -1123,7 +1123,7 @@ GameObject:
   - component: {fileID: 1698516600922803610}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1137,8 +1137,8 @@ Transform:
   m_GameObject: {fileID: 4694203867489600994}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 1.55}
-  m_LocalScale: {x: 3.05, y: 4, z: 0.050000004}
+  m_LocalPosition: {x: 0, y: 2, z: 1.75}
+  m_LocalScale: {x: 4, y: 4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1680528828951252595}
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 914691624940133141}
   m_Layer: 0
   m_Name: j4
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1529,7 +1529,7 @@ GameObject:
   - component: {fileID: 8700276418724926207}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1543,8 +1543,8 @@ Transform:
   m_GameObject: {fileID: 5895377711248930846}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.55, y: 2, z: 0}
-  m_LocalScale: {x: 3.05, y: 4, z: 0.050000004}
+  m_LocalPosition: {x: -1.75, y: 2, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1680528828951252595}
@@ -1641,7 +1641,7 @@ GameObject:
   - component: {fileID: 7738065796280333217}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1655,8 +1655,8 @@ Transform:
   m_GameObject: {fileID: 5902082067142127352}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -1.55}
-  m_LocalScale: {x: 3.05, y: 4, z: 0.05}
+  m_LocalPosition: {x: 0, y: 2, z: -1.75}
+  m_LocalScale: {x: 4, y: 4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1680528828951252595}
@@ -1979,7 +1979,7 @@ GameObject:
   - component: {fileID: 8397919688110301327}
   m_Layer: 0
   m_Name: j0
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2122,7 +2122,7 @@ GameObject:
   - component: {fileID: 2450489659038241521}
   m_Layer: 0
   m_Name: j3
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2377,9 +2377,10 @@ GameObject:
   - component: {fileID: 5782884836319965126}
   - component: {fileID: 4811276343225448348}
   - component: {fileID: 5361646904170914500}
+  - component: {fileID: 7598808302691702254}
   m_Layer: 0
   m_Name: j6
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2620,6 +2621,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af95184ac19c61940a6fd558d13c5496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionReporter
+--- !u!114 &7598808302691702254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8375763224424725898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b728df4cabbdde44bf990890423dca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerReporter
 --- !u!1 &8822860890260292320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,7 +2650,7 @@ GameObject:
   - component: {fileID: 6315930202865645967}
   m_Layer: 0
   m_Name: j2
-  m_TagString: Untagged
+  m_TagString: RobotPart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
