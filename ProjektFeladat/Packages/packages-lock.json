@@ -114,7 +114,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ml-agents": {
-      "version": "file:D:/projektfeladat/ml-agents-release_23/com.unity.ml-agents",
+      "version": "file:D:/projektfeladat/unity_projektek/com.unity.ml-agents",
       "depth": 0,
       "source": "local",
       "dependencies": {

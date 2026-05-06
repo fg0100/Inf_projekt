@@ -742,7 +742,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 2000
+  MaxStep: 5000
   _goal: {fileID: 111109804041183538}
   _groundRenderer: {fileID: 4559257276090902076}
   CurrentEpisode: 0

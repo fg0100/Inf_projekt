@@ -2,58 +2,58 @@
     "RobotReacher": {
         "checkpoints": [
             {
-                "steps": 11999918,
-                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-11999918.onnx",
-                "reward": 1.5043155951425433,
-                "creation_time": 1777490170.0538995,
+                "steps": 14499999,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-14499999.onnx",
+                "reward": -0.24264518422289535,
+                "creation_time": 1778079874.989393,
                 "auxillary_file_paths": [
-                    "results\\projekt02\\RobotReacher\\RobotReacher-11999918.pt"
+                    "results\\projekt02\\RobotReacher\\RobotReacher-14499999.pt"
                 ]
             },
             {
-                "steps": 12429552,
-                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-12429552.onnx",
-                "reward": 1.9523580769697826,
-                "creation_time": 1777490573.7054412,
+                "steps": 14999958,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-14999958.onnx",
+                "reward": -0.8401798835167518,
+                "creation_time": 1778080317.5503008,
                 "auxillary_file_paths": [
-                    "results\\projekt02\\RobotReacher\\RobotReacher-12429552.pt"
+                    "results\\projekt02\\RobotReacher\\RobotReacher-14999958.pt"
                 ]
             },
             {
-                "steps": 12499944,
-                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-12499944.onnx",
-                "reward": 0.8095966118077437,
-                "creation_time": 1777490690.480229,
+                "steps": 15499952,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-15499952.onnx",
+                "reward": -0.560642380383797,
+                "creation_time": 1778080784.0358515,
                 "auxillary_file_paths": [
-                    "results\\projekt02\\RobotReacher\\RobotReacher-12499944.pt"
+                    "results\\projekt02\\RobotReacher\\RobotReacher-15499952.pt"
                 ]
             },
             {
-                "steps": 12999958,
-                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-12999958.onnx",
-                "reward": 1.035098892564957,
-                "creation_time": 1777491058.2010784,
+                "steps": 15999993,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-15999993.onnx",
+                "reward": -0.3826781189909168,
+                "creation_time": 1778081287.471791,
                 "auxillary_file_paths": [
-                    "results\\projekt02\\RobotReacher\\RobotReacher-12999958.pt"
+                    "results\\projekt02\\RobotReacher\\RobotReacher-15999993.pt"
                 ]
             },
             {
-                "steps": 13000387,
-                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-13000387.onnx",
-                "reward": 1.090687916214977,
-                "creation_time": 1777491058.322558,
+                "steps": 16000109,
+                "file_path": "results\\projekt02\\RobotReacher\\RobotReacher-16000109.onnx",
+                "reward": -0.4371403415615742,
+                "creation_time": 1778081287.6901238,
                 "auxillary_file_paths": [
-                    "results\\projekt02\\RobotReacher\\RobotReacher-13000387.pt"
+                    "results\\projekt02\\RobotReacher\\RobotReacher-16000109.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 13000387,
+            "steps": 16000109,
             "file_path": "results\\projekt02\\RobotReacher.onnx",
-            "reward": 1.090687916214977,
-            "creation_time": 1777491058.322558,
+            "reward": -0.4371403415615742,
+            "creation_time": 1778081287.6901238,
             "auxillary_file_paths": [
-                "results\\projekt02\\RobotReacher\\RobotReacher-13000387.pt"
+                "results\\projekt02\\RobotReacher\\RobotReacher-16000109.pt"
             ]
         }
     },

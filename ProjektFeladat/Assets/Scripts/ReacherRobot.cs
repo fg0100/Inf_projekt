@@ -218,22 +218,22 @@ public class ReacherRobot : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        var torque = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f) * 100f;
+        var torque = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f) * 10f;
         m_RbA.AddTorque(new Vector3(0f, torque, 0f));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f) * 100f;
+        torque = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f) * 10f;
         m_RbB.AddTorque(new Vector3(0f, 0f, torque));
        
-        torque = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f) * 100f;
+        torque = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f) * 10f;
         m_RbC.AddTorque(new Vector3(0f, 0f, torque));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[3], -1f, 1f) * 100f;
+        torque = Mathf.Clamp(actions.ContinuousActions[3], -1f, 1f) * 10f;
         m_RbD.AddTorque(new Vector3(0f, torque, 0f));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[4], -1f, 1f) * 100f;
+        torque = Mathf.Clamp(actions.ContinuousActions[4], -1f, 1f) * 10f;
         m_RbE.AddTorque(new Vector3(0f, 0f, torque));
         
-        torque = Mathf.Clamp(actions.ContinuousActions[5], -1f, 1f) * 100f;
+        torque = Mathf.Clamp(actions.ContinuousActions[5], -1f, 1f) * 10f;
         m_RbF.AddTorque(new Vector3(0f, torque, 0f));
 
         m_RodDegree += m_RodSpeed;
@@ -270,7 +270,7 @@ public class ReacherRobot : Agent
         Vector3 goalPosition = transform.localPosition + randomDirection * randomDistance;
 
         // Apply the calculated position to the goal
-        goalPosition.y += 1f;
+        goalPosition.y += 0.8f;
         _goal.localPosition = goalPosition;
 
     }
